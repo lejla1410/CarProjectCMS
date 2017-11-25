@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CarsCms.Interfaces;
 using CarsCms.Models;
 using CarsCms.Repository.Interfaces;
+using CarsCms.ViewModels;
 
 namespace CarsCms.Controllers
 {
@@ -24,7 +25,14 @@ namespace CarsCms.Controllers
         // GET: Cars
         public ActionResult Index()
         {
-            return View(_carsRepository.GetWhere(x => x.Id>0));
+            var carVM = new VMCars {CarList = new List<CarEntity>()};
+            carVM.ShowIfAuth = _businessLogic.CheckIfUserIsAutorize();
+            if (carVM.ShowIfAuth)
+                carVM.CarList = _carsRepository.GetWhere(x => x.Id > 0);
+            else
+                carVM.CarList = _carsRepository.GetWhere(x => x.Id > 0 && x.IsActive);
+
+            return View(carVM);
         }
 
         // GET: Cars/Details/5
@@ -34,12 +42,14 @@ namespace CarsCms.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CarEntity carEntity = _carsRepository.GetWhere(x => x.Id == id.Value).FirstOrDefault();
-            if (carEntity == null)
+            var carVM = new VMCars();
+            carVM.Car = _carsRepository.GetWhere(x => x.Id == id.Value).FirstOrDefault();
+            carVM.ShowIfAuth = _businessLogic.CheckIfUserIsAutorize();
+            if (carVM.Car == null)
             {
                 return HttpNotFound();
             }
-            return View(carEntity);
+            return View(carVM);
         }
 
         // GET: Cars/Create
@@ -53,12 +63,12 @@ namespace CarsCms.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CarEntity carEntity)
+        public ActionResult Create(VMCars carEntity)
         {
             if (ModelState.IsValid)
             {
-                carEntity.ModPerson = _businessLogic.CheckIfUserIsAuthAndReturnName();
-                _carsRepository.Create(carEntity);
+                carEntity.Car.ModPerson = _businessLogic.CheckIfUserIsAuthAndReturnName();
+                _carsRepository.Create(carEntity.Car);
                 return RedirectToAction("Index");
             }
 
@@ -72,12 +82,14 @@ namespace CarsCms.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CarEntity carEntity = _carsRepository.GetWhere(x => x.Id == id.Value).FirstOrDefault();
-            if (carEntity == null)
+            var carVM = new VMCars();
+            carVM.Car = _carsRepository.GetWhere(x => x.Id == id.Value).FirstOrDefault();
+            carVM.ShowIfAuth = _businessLogic.CheckIfUserIsAutorize();
+            if (carVM.Car == null)
             {
                 return HttpNotFound();
             }
-            return View(carEntity);
+            return View(carVM);
         }
 
         // POST: Cars/Edit/5
@@ -85,11 +97,12 @@ namespace CarsCms.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CarEntity carEntity)
+        public ActionResult Edit(VMCars carEntity)
         {
             if (ModelState.IsValid)
             {
-                _carsRepository.Update(carEntity);
+                carEntity.Car.ModPerson = _businessLogic.CheckIfUserIsAuthAndReturnName();
+                _carsRepository.Update(carEntity.Car);
                 return RedirectToAction("Index");
             }
             return View(carEntity);
@@ -102,12 +115,14 @@ namespace CarsCms.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CarEntity carEntity = _carsRepository.GetWhere(x => x.Id == id.Value).FirstOrDefault();
-            if (carEntity == null)
+            var carVM = new VMCars();
+            carVM.Car = _carsRepository.GetWhere(x => x.Id == id.Value).FirstOrDefault();
+            carVM.ShowIfAuth = _businessLogic.CheckIfUserIsAutorize();
+            if (carVM.Car == null)
             {
                 return HttpNotFound();
             }
-            return View(carEntity);
+            return View(carVM);
         }
 
         // POST: Cars/Delete/5

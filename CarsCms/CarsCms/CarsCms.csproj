@@ -204,6 +204,7 @@
     <Compile Include="Repository\Interfaces\IAbstractRepository.cs" />
     <Compile Include="Repository\Interfaces\ICarsRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\VMCars.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
