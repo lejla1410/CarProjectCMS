@@ -28,7 +28,7 @@ namespace CarsCms.Validations
             //        array[0] = char.ToUpper(array[0]);
             //    }
             //}
-            if (String.IsNullOrEmpty(name))
+            if (!String.IsNullOrEmpty(name))
             {
                 return char.IsUpper(name[0]);
             }
