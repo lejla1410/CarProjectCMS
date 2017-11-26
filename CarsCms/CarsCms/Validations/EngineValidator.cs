@@ -16,7 +16,7 @@ namespace CarsCms.Validations
             RuleFor(x => x.Capacity).LessThan(6000).WithMessage("Pojemność musi być poniżej 6000");
             RuleFor(x => x.Name).MaximumLength(16).WithMessage("Nazwa może mieć maksymalnie 16 znaków");
             RuleFor(x => x.Name).MinimumLength(3).WithMessage("Nazwa może mieć minimalnie 16 znaków");
-            RuleFor(x => x.Name).Must(name => UpperFirst(name).WithMessage("Pierwsza litera musi być wielka ");
+            RuleFor(x => x.Name).Must(name => UpperFirst(name)).WithMessage("Pierwsza litera musi być wielka");
         }
         public bool UpperFirst(string name)
         {
