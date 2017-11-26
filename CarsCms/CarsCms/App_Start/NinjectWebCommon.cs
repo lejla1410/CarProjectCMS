@@ -68,6 +68,7 @@ namespace CarsCms.App_Start
         {
             kernel.Bind<ICarsRepository>().To<CarsRepository>();
             kernel.Bind<ICarBusinessLogic>().To<CarBusinessLogic>();
+            kernel.Bind<IEngineRepository>().To<EngineRepository>();
         }        
     }
 }

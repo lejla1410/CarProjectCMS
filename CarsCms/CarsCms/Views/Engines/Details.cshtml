@@ -1,0 +1,82 @@
+﻿@model CarsCms.Models.Engine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Engine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.MyModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.MyModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.DateCreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.DateCreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.DateMod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.DateMod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eng.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eng.IsActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Eng.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

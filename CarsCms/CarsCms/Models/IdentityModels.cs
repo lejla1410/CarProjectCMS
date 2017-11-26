@@ -31,5 +31,7 @@ namespace CarsCms.Models
         }
 
         public System.Data.Entity.DbSet<CarsCms.Models.CarEntity> CarEntities { get; set; }
+
+        public System.Data.Entity.DbSet<CarsCms.Models.Engine> Engines { get; set; }
     }
 }
