@@ -15,7 +15,7 @@ namespace CarsCms.Validations
             RuleFor(x => x.Capacity).GreaterThan(1500).WithMessage("Pojemność musi być powyżej 1500");
             RuleFor(x => x.Capacity).LessThan(6000).WithMessage("Pojemność musi być poniżej 6000");
             RuleFor(x => x.Name).MaximumLength(16).WithMessage("Nazwa może mieć maksymalnie 16 znaków");
-            RuleFor(x => x.Name).MinimumLength(3).WithMessage("Nazwa może mieć minimalnie 16 znaków");
+            RuleFor(x => x.Name).MinimumLength(3).WithMessage("Nazwa może mieć minimalnie 3 znaków");
             RuleFor(x => x.Name).Must(name => UpperFirst(name)).WithMessage("Pierwsza litera musi być wielka");
         }
         public bool UpperFirst(string name)
@@ -34,5 +34,13 @@ namespace CarsCms.Validations
             }
             return false;
         }
+
+        public bool CapacityAndWeight(string waga)
+        {
+            //jesli pojemnosc pomiedzy 1596 a 1602 to waga powyzej 650
+            // kolejny to jesli poj/10 jest wieksze od 20 i nazwa zawiera AAA to wyskakuje blad
+            return true;
+        }
+
     }
 }
